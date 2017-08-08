@@ -12,16 +12,20 @@ import android.telephony.TelephonyManager;
 public class MainActivity extends AppCompatActivity
 {
     /*
-    *调试lint检查过程
-    ①、创建remote debug，lint_debug
+    gradlew build -info -Dorg.gradle.daemon=false -Dorg.gradle.debug=true -Dorg.gradle.java.home="C:\\Program Files\\Java\\jdk1.8.0_131"
+
+    lint JVM启动项
+    -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
+    server =y 表示监听debuuger的attach请求
+    suspend =y 表示在debugger连接前，服务端被挂起
+    address 监听端口，在5005接收debugger发起的TCP连接
     
-    ②、在terminal中执行下面的命令
-    gradlew assembleDebug -Dorg.gradle.daemon=false -Dorg.gradle.debug=true -Dorg.gradle.java.home="C:\\Program Files\\Java\\jdk1.8.0_131"
-    然后会显示下面的信息，意味着在等待client
-    To honour the JVM settings for this build a new ...
-    
-    ③、在插件代码打上断点，点击apt_debug的debug、再点击terminal激活界面即可
-    * */
+    lint-debugger
+    -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    server =y 表示监听debuuger的attach请求，这里debugger不会收到另一个debugger的attach请求，所以没有意义
+    suspend =y 表示debugger JVM直接运行
+    address=5005 表示debugger向5005发出attach请求
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

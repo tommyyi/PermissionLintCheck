@@ -23,7 +23,7 @@ import lombok.ast.ConstructorInvocation;
  */
 public class DetectorCall extends Detector implements Detector.JavaScanner
 {
-    public static Issue ISSUE_CALL = Issue.create("Call phone",
+    public static Issue ISSUE_CALL = Issue.create("拨打电话操作",
         "call operation should be done after CALL_PHONE permission check",
         "call operation should be done after CALL_PHONE permission check, you should declare CALL_PHONE in manifest at the same time",
         /**
@@ -55,7 +55,7 @@ public class DetectorCall extends Detector implements Detector.JavaScanner
         {
             if(node.toString().contains("(Intent.ACTION_CALL)"))
             {
-                context.report(ISSUE_CALL, node, context.getLocation(node), "please check permission CALL_PHONE");
+                context.report(ISSUE_CALL, node, context.getLocation(node), "请在操作前先检查权限CALL_PHONE授予情况");
             }
         }
 
