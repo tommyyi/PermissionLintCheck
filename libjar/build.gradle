@@ -1,0 +1,31 @@
+apply plugin: 'java'
+
+dependencies {
+    compile 'com.android.tools.lint:lint-api:24.3.1'
+    compile 'com.android.tools.lint:lint-checks:24.3.1'
+
+    testCompile 'com.android.tools.lint:lint-tests:24.3.1'
+}
+
+/**
+ * Lint-Registry是透露给lint工具的注册类,同时也通过这个方法进行打jar包
+ */
+jar {
+    manifest {
+        attributes("Lint-Registry": "com.example.MyIssueRegistry")
+    }
+}
+
+defaultTasks 'assemble'
+
+configurations {
+    lintJarOutput
+}
+
+dependencies {
+    lintJarOutput files(jar)
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
+    defaultConfig {
+        minSdkVersion 9
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+configurations {
+    lintJarImport
+}
+
+/**
+ * 链接到lintJar中的jar方法
+ */
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    lintJarImport project(path: ':libjar', configuration: 'lintJarOutput')
+
+    testCompile 'junit:junit:4.12'
+}
+
+/**
+ * 复制JAR包到目录build/intermediates/lint/下
+ */
+task copyLintJar(type: Copy) {
+    from (configurations.lintJarImport) {
+        rename {
+            String fileName ->
+                'lint.jar'
+        }
+    }
+    into 'build/intermediates/lint/'
+}
+
+project.afterEvaluate {
+    def compileLintTask = project.tasks.find{ it.name == 'compileLint'}
+    compileLintTask.dependsOn(copyLintJar)
+}
