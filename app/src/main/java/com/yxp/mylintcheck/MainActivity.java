@@ -20,22 +20,6 @@ import android.telephony.TelephonyManager;
 
 public class MainActivity extends AppCompatActivity
 {
-    /*
-    gradlew build -info -Dorg.gradle.daemon=false -Dorg.gradle.debug=true -Dorg.gradle.java.home="C:\\Program Files\\Java\\jdk1.8.0_131"
-
-    lint JVM启动项
-    -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=5005
-    server =y 表示监听debuuger的attach请求
-    suspend =y 表示在debugger连接前，服务端被挂起
-    address 监听端口，在5005接收debugger发起的TCP连接
-    
-    lint-debugger
-    -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
-    server =y 表示监听debuuger的attach请求，这里debugger不会收到另一个debugger的attach请求，所以没有意义
-    suspend =y 表示debugger JVM直接运行
-    address=5005 表示debugger向5005发出attach请求
-    */
-
     private static final String[] PHONES_PROJECTION = new String[] {
             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER, ContactsContract.Contacts.Photo.PHOTO_ID, ContactsContract.CommonDataKinds.Phone.CONTACT_ID };
 
