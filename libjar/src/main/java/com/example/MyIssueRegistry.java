@@ -21,6 +21,7 @@ public class MyIssueRegistry extends IssueRegistry
         issueList.add(DetectorPhoneState.ISSUE_PHONE_STATE);
         issueList.add(DetectorSDCard.ISSUE_SDCARD);
         issueList.add(DetectorCall.ISSUE_CALL);
+        issueList.add(DetectorIntent.ISSUE_Intent);
         return issueList;
     }
 }
